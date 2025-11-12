@@ -11,7 +11,7 @@ The main elements are **ColorSlider.swift** and **ColorModel.swift**.
 
 The key to using this *ColorSlider* in your code is to create a **ColorModel** such as:
 
-    @State var colorModel = ColorModel()
+    @State private var colorModel = ColorModel()
 
 It is passed to the *ColorSlider* using *.environment(colorModel)*.
 
