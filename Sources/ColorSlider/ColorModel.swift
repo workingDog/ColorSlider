@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 
 /**
- * the ColorSlider data model
+ * The data model
  */
 @Observable
 public class ColorModel {
@@ -31,12 +31,16 @@ public class ColorModel {
     public var grayScale = false
     
     // the thickness of the bar of each color in the slider.
-    public var bandSize = 1
+    public var bandSize: Int = 1
     
     // keys for UserDefaults
-    static let keyValue: String = "Value"
+    static let keyValue: String = "value"
     static let keyOpacity: String = "opacity"
     static let keyGrayScale: String = "grayScale"
+    static let keyBandSize: String = "bandSize"
+    static let keyNColors: String = "nColors"
+    static let keySaturation: String = "saturation"
+    static let keyBrightness: String = "brightness"
 
     // default 100 colors, not gray scale
     public init(nColors: Int = 100, grayScale: Bool = false) {
@@ -47,7 +51,7 @@ public class ColorModel {
         }
     }
 
-    // the color array for the ColorSlider colorGradient
+    // the color array for the colorGradient
     public var colors: [Color] {
         guard nColors > 0 else { return [] }
         let delta: Double = 1/Double(nColors).rounded(.up)
@@ -79,24 +83,27 @@ public class ColorModel {
         let n = colors.count - 1
         return 0...(n > 0 ? Double(n) : 1.0)
     }
-    
-    // convenience color gradient that can be used in other Views
-    public var gradient: LinearGradient {
-        LinearGradient(gradient: Gradient(colors: [color, color.opacity(opacity)]), startPoint: .top, endPoint: .bottom)
-    }
-    
+
     // store settings in UserDefaults
     public func storeSettings() {
         UserDefaults.standard.set(self.opacity, forKey: ColorModel.keyOpacity)
         UserDefaults.standard.set(self.value, forKey: ColorModel.keyValue)
         UserDefaults.standard.set(self.grayScale, forKey: ColorModel.keyGrayScale)
+        UserDefaults.standard.set(self.bandSize, forKey: ColorModel.keyBandSize)
+        UserDefaults.standard.set(self.nColors, forKey: ColorModel.keyNColors)
+        UserDefaults.standard.set(self.saturation, forKey: ColorModel.keySaturation)
+        UserDefaults.standard.set(self.brightness, forKey: ColorModel.keyBrightness)
     }
     
     // retrieve settings from UserDefaults
     public func retrieveSettings() {
-        self.opacity = UserDefaults.standard.double(forKey: ColorModel.keyOpacity)
+        self.opacity = UserDefaults.standard.object(forKey: ColorModel.keyOpacity) as? Double ?? 0.5
         self.value = UserDefaults.standard.double(forKey: ColorModel.keyValue)
         self.grayScale = UserDefaults.standard.bool(forKey: ColorModel.keyGrayScale)
+        self.bandSize = UserDefaults.standard.object(forKey: ColorModel.keyBandSize) as? Int ?? 1
+        self.nColors = UserDefaults.standard.object(forKey: ColorModel.keyNColors) as? Int ?? 100
+        self.saturation = UserDefaults.standard.object(forKey: ColorModel.keySaturation) as? Double ?? 1.0
+        self.brightness = UserDefaults.standard.object(forKey: ColorModel.keyBrightness) as? Double ?? 1.0
     }
     
     // update the model palette to grayScale or color

@@ -4,24 +4,23 @@
 
  ![im01](screenshots/image01.png)  ![im02](screenshots/image02.png)
 
+**ColorSlider** is a simple SwiftUI data model for displaying a color slider. It allows users to dynamically select a color from a range of hues or grayscale values.
 
-**ColorSlider** is a simple SwiftUI view and data model that displays a color slider. It allows users to dynamically select a color from a range of hues or grayscale values.
+The main element is the **ColorModel.swift**. There is also an example slider  **ColorSlider.swift**.
 
-The main elements are **ColorSlider.swift** and **ColorModel.swift**.
-
-The key to using this *ColorSlider* in your code is to create a **ColorModel** such as:
+The key to using this *data model* in your code is to create a **ColorModel** such as:
 
     @State private var colorModel = ColorModel()
 
-It is passed to the *ColorSlider* using *.environment(colorModel)*.
+It is passed to the example *ColorSlider* using *.environment(colorModel)*.
 
-See also the *ColorSliderDemo* repo for a demo use.
+See also the [ColorSliderDemo](https://github.com/workingDog/ColorSliderDemo) for a demo use.
 
-As the slider knob is changed, the current color selected can be obtain from the **ColorModel** using:
+As the slider knob is changed, the current color selected can be obtain dynamically from the **ColorModel** using:
     
     colorModel.color
     
-The following can be set to customise the **ColorModel** and thus the **ColorSlider**:
+The following can be set to customise the **ColorModel** and thus the **ColorSlider** example:
 
 - nColors, the number of colors to display in the slider, default 100.
 - saturation, the desired saturation value, default 1.

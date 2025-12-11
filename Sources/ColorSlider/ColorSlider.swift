@@ -1,6 +1,6 @@
 //
 //  ColorSlider.swift
-//  MusicRadio
+//  ColorSlider
 //
 //  Created by Ringo Wathelet on 2025/11/11.
 //
@@ -8,26 +8,20 @@ import Foundation
 import SwiftUI
 
 /**
- * The color slider view
+ * Example of a color slider
  */
 public struct ColorSlider: View {
     @Environment(ColorModel.self) var colorModel
     
     public init() { }
-
+    
     public var body: some View {
-        Slider(value: Binding<Double>(
-            get: { colorModel.value },
-            set: { updateModel($0) }),
-            in: colorModel.colorRange, step: 1)
-        .onAppear {
-            updateModel(colorModel.value)
-        }
+        @Bindable var colorModel = colorModel
+        Slider(value: $colorModel.value, in: colorModel.colorRange, step: 1)
+            .frame(width: 333, height: 33)
+            .background(colorModel.colorGradient) // <---
+            .onChange(of: colorModel.value) {
+                colorModel.updatePalette()
+            }
     }
-    
-    public func updateModel(_ value: Double) {
-        colorModel.value = value
-        colorModel.updatePalette()
-    }
-    
 }
