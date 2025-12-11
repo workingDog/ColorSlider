@@ -20,8 +20,5 @@ public struct ColorSlider: View {
         Slider(value: $colorModel.value, in: colorModel.colorRange, step: Double(colorModel.bandSize))
             .frame(width: 333, height: 33)
             .background(colorModel.colorGradient) // <---
-            .onChange(of: colorModel.value) {
-                colorModel.updatePalette()
-            }
     }
 }

@@ -25,7 +25,12 @@ public class ColorModel {
     public var opacity: Double = 0.5
     
     // the current color
-    public var color = Color.white
+    public var color: Color {
+        self.saturation = grayScale ? 0.0 : 1.0
+        guard !self.colors.isEmpty else { return .clear }
+        let index = Int(self.value.clamped(to: 0...Double(self.colors.count - 1)))
+        return self.colors[index]
+    }
 
     // grayscale or color palette
     public var grayScale = false
@@ -105,11 +110,11 @@ public class ColorModel {
         self.saturation = UserDefaults.standard.object(forKey: ColorModel.keySaturation) as? Double ?? 1.0
         self.brightness = UserDefaults.standard.object(forKey: ColorModel.keyBrightness) as? Double ?? 1.0
     }
-    
-    // update the model palette to grayScale or color
-    public func updatePalette() {
-        self.saturation = grayScale ? 0.0 : 1.0
-        self.color = self.colors.isEmpty ? Color.clear : self.colors[Int(self.value)]
+
+}
+
+extension Comparable {
+    func clamped(to limits: ClosedRange<Self>) -> Self {
+        min(max(self, limits.lowerBound), limits.upperBound)
     }
-    
 }
