@@ -17,7 +17,7 @@ public struct ColorSlider: View {
     
     public var body: some View {
         @Bindable var colorModel = colorModel
-        Slider(value: $colorModel.value, in: colorModel.colorRange, step: 1)
+        Slider(value: $colorModel.value, in: colorModel.colorRange, step: Double(colorModel.bandSize))
             .frame(width: 333, height: 33)
             .background(colorModel.colorGradient) // <---
             .onChange(of: colorModel.value) {
