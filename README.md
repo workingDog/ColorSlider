@@ -4,9 +4,9 @@
 
  ![im01](screenshots/image01.png)  ![im02](screenshots/image02.png)
 
-**ColorSlider** is a simple SwiftUI data model for displaying a color slider. It allows users to dynamically select a color from a range of hues or grayscale values.
+**ColorModel.swift** is a simple SwiftUI data model for displaying a color slider. It allows users to dynamically select a color from a range of hues or grayscale values.
 
-The main element is the **ColorModel.swift**. There is also an example slider  **ColorSlider.swift**.
+The main element is the **ColorModel.swift** data model. There is also an example slider  **ColorSlider.swift**.
 
 The key to using this *data model* in your code is to create a **ColorModel** such as:
 
