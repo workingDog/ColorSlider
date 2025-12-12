@@ -20,5 +20,7 @@ public struct ColorSlider: View {
         Slider(value: $colorModel.value, in: colorModel.colorRange, step: Double(colorModel.bandSize))
             .frame(width: 333, height: 33)
             .background(colorModel.colorGradient) // <---
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 1).foregroundColor(.black))
     }
 }
